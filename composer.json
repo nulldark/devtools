@@ -2,5 +2,17 @@
     "name": "nulldark/devtools",
     "description": "A composer plugin with preconfigured development tools for faster development.",
     "license": "MIT",
-    "type": "composer-plugin"
+    "type": "composer-plugin",
+    "require": {
+        "php": "~8.2.0 || ~8.3.0"
+    },
+    "minimum-stability": "alpha",
+    "config": {
+        "optimize-autoloader": true,
+        "platform": {
+            "php": "8.2"
+        },
+        "preferred-install": "dist",
+        "sort-packages": true
+    }
 }
