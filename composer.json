@@ -1,0 +1,6 @@
+{
+    "name": "nulldark/devtools",
+    "description": "A composer plugin with preconfigured development tools for faster development.",
+    "license": "MIT",
+    "type": "composer-plugin"
+}
