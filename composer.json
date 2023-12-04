@@ -19,6 +19,7 @@
     "require": {
         "php": "~8.2.4 || ~8.3.0",
         "ext-mbstring": "*",
+        "composer/composer": "^2.7@dev",
         "mockery/mockery": "^2.0.x-dev",
         "nulldark/plugin-mockery": "dev-master",
         "phpmd/phpmd": "dev-master",
@@ -46,5 +47,13 @@
             "phpstan/extension-installer": true,
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
+    },
+    "autoload": {
+        "psr-4": {
+            "Nulldark\\DevTools\\": "src/"
+        }
+    },
+    "extra": {
+        "class": "\\Nulldark\\DevTools\\Composer\\DevToolsPlugin"
     }
 }
