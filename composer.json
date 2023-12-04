@@ -20,6 +20,7 @@
         "php": "~8.2.4 || ~8.3.0",
         "ext-mbstring": "*",
         "mockery/mockery": "^2.0.x-dev",
+        "nulldark/plugin-mockery": "dev-master",
         "phpmd/phpmd": "dev-master",
         "phpstan/extension-installer": "^1.3",
         "phpstan/phpstan": "1.11.x-dev",
