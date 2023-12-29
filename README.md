@@ -30,7 +30,7 @@ composer require --dev nulldark/devtools
 | [phpstan/phpstan-mockery](https://github.com/phpstan/phpstan-mockery)                                     | 1.1.x-dev     |
 | [phpstan/phpstan-phpunit](https://github.com/phpstan/phpstan-phpunit)                                     | 1.4.x-dev     |
 | [phpstan/phpstan-strict-rules](https://github.com/phpstan/phpstan-strict-rules)                           | 1.6.x-dev     |
-| [phpunit/phpunit](https://packagist.org/packages/phpunit/phpunit)                                         | ^11.0@dev     |
+| [phpunit/phpunit](https://packagist.org/packages/phpunit/phpunit)                                         | ^10.5.x-dev   |
 | [psalm/plugin-phpunit](https://github.com/psalm/psalm-plugin-phpunit)                                     | dev-master    |
 | [slevomat/coding-standard](slevomat/coding-standard)                                                      | ^8.0@dev      |
 | [squizlabs/php_codesniffer](https://github.com/squizlabs/PHP_CodeSniffer)                                 | ^3.7.1        |
