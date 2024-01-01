@@ -1,7 +1,7 @@
 # nulldark/devtools
 
-This composer plugin  is a development toolkit aimed at simplifying and enhancing the coding process for developers. 
-This project is crafted with an intent to streamline the efforts involved in developmental 
+This composer plugin is a development toolkit aimed at simplifying and enhancing the coding process for developers.
+This project is crafted with an intent to streamline the efforts involved in developmental
 tasks, automate mundane chores, and artfully clear the path for developers to push their boundaries.
 
 ## Usage
@@ -13,6 +13,7 @@ composer require --dev nulldark/devtools
 ```
 
 ## Tools
+
 | Package                                                                                                   | Version       |
 |-----------------------------------------------------------------------------------------------------------|---------------|
 | [php](https://github.com/php/php-src)                                                                     | ~8.2.4 ~8.3.0 |
@@ -47,7 +48,8 @@ The maintainers of this project ask contributors to follow the [code of conduct]
 ## PHP Version Support Policy
 
 This project supports PHP versions with [active and security support](https://www.php.net/supported-versions.php).
-The maintainers of this project add support for a PHP version following its initial release and drop support for a PHP version when it has reached its end of security support.
+The maintainers of this project add support for a PHP version following its initial release and drop support for a PHP
+version when it has reached its end of security support.
 
 ## License
 
