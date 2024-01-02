@@ -22,43 +22,30 @@
  * SOFTWARE.
  */
 
-namespace Nulldark\DevTools\Composer;
+namespace Nulldark\DevTools\Cli\Command\Lint;
 
-use Composer\Composer;
-use Composer\IO\IOInterface;
-use Composer\Plugin\Capable;
-use Composer\Plugin\PluginInterface;
+use Nulldark\DevTools\Cli\Command\ProcessCommand;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
-class DevToolsPlugin implements PluginInterface, Capable
+#[AsCommand(
+    name: 'dev:lint:fix',
+    description: 'Fix violations of coding standards.',
+    aliases: ['lint:fix', 'phpcbf']
+)]
+class FixCommand extends ProcessCommand
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function activate(Composer $composer, IOInterface $io): void
+    public function getExecutableName(): string
     {
+        return 'phpcbf';
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function deactivate(Composer $composer, IOInterface $io)
-    {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function uninstall(Composer $composer, IOInterface $io)
-    {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getCapabilities(): array
+    public function getExecutableArgs(InputInterface $input, OutputInterface $output): array
     {
         return [
-            \Composer\Plugin\Capability\CommandProvider::class => CommandProvider::class
+            '--cache=build/cache/phpcs.cache',
+            ...$input->getArguments()['args'] ?? []
         ];
     }
 }

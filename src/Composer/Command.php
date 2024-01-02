@@ -24,41 +24,34 @@
 
 namespace Nulldark\DevTools\Composer;
 
-use Composer\Composer;
-use Composer\IO\IOInterface;
-use Composer\Plugin\Capable;
-use Composer\Plugin\PluginInterface;
+use Composer\Command\BaseCommand;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
-class DevToolsPlugin implements PluginInterface, Capable
+final class Command extends BaseCommand
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function activate(Composer $composer, IOInterface $io): void
+    public function __construct(
+        public readonly SymfonyCommand $command
+    )
     {
+        parent::__construct($command->getName());
+    }
+
+    protected function configure(): void
+    {
+        $this
+            ->setAliases($this->command->getAliases())
+            ->setDefinition($this->command->getDefinition())
+            ->setDescription($this->command->getDescription())
+            ->setHidden($this->command->isHidden());
     }
 
     /**
-     * {@inheritDoc}
+     * @throws \Symfony\Component\Console\Exception\ExceptionInterface
      */
-    public function deactivate(Composer $composer, IOInterface $io)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function uninstall(Composer $composer, IOInterface $io)
-    {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getCapabilities(): array
-    {
-        return [
-            \Composer\Plugin\Capability\CommandProvider::class => CommandProvider::class
-        ];
+        return $this->command->run($input, $output);
     }
 }

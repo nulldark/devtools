@@ -22,43 +22,31 @@
  * SOFTWARE.
  */
 
-namespace Nulldark\DevTools\Composer;
+namespace Nulldark\DevTools\Cli\Command\Lint;
 
-use Composer\Composer;
-use Composer\IO\IOInterface;
-use Composer\Plugin\Capable;
-use Composer\Plugin\PluginInterface;
+use Nulldark\DevTools\Cli\Command\ProcessCommand;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
-class DevToolsPlugin implements PluginInterface, Capable
+#[AsCommand(
+    name: 'dev:lint:syntax',
+    description: 'Check violations of syntax.',
+    aliases: ['lint:syntax', 'parallel-lint']
+)]
+class SyntaxCommand extends ProcessCommand
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function activate(Composer $composer, IOInterface $io): void
+    public function getExecutableName(): string
     {
+        return 'parallel-lint';
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function deactivate(Composer $composer, IOInterface $io)
-    {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function uninstall(Composer $composer, IOInterface $io)
-    {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getCapabilities(): array
+    public function getExecutableArgs(InputInterface $input, OutputInterface $output): array
     {
         return [
-            \Composer\Plugin\Capability\CommandProvider::class => CommandProvider::class
+            '--colors',
+            'src',
+            ...$input->getArguments()['args'] ?? []
         ];
     }
 }

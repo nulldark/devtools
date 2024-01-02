@@ -22,43 +22,24 @@
  * SOFTWARE.
  */
 
-namespace Nulldark\DevTools\Composer;
+namespace Nulldark\DevTools\Cli;
 
-use Composer\Composer;
-use Composer\IO\IOInterface;
-use Composer\Plugin\Capable;
-use Composer\Plugin\PluginInterface;
+use Symfony\Component\Console\Application;
 
-class DevToolsPlugin implements PluginInterface, Capable
+class Console extends Application
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function activate(Composer $composer, IOInterface $io): void
+    public function __construct(string $name = 'devtools', string $version = '0.1-dev')
     {
-    }
+        parent::__construct($name, $version);
 
-    /**
-     * {@inheritDoc}
-     */
-    public function deactivate(Composer $composer, IOInterface $io)
-    {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function uninstall(Composer $composer, IOInterface $io)
-    {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getCapabilities(): array
-    {
-        return [
-            \Composer\Plugin\Capability\CommandProvider::class => CommandProvider::class
-        ];
+        $this->addCommands([
+            new Command\StaticAnalyze\PhpstanCommand(),
+            new Command\StaticAnalyze\PsalmCommand(),
+            new Command\Lint\FixCommand(),
+            new Command\Lint\StyleCommand(),
+            new Command\Lint\SyntaxCommand(),
+            new Command\Test\UnitCommand(),
+            new Command\Common\DevToolsCommand(),
+        ]);
     }
 }

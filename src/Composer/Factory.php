@@ -25,40 +25,27 @@
 namespace Nulldark\DevTools\Composer;
 
 use Composer\Composer;
-use Composer\IO\IOInterface;
-use Composer\Plugin\Capable;
-use Composer\Plugin\PluginInterface;
+use Composer\IO\ConsoleIO;
+use Symfony\Component\Console\Helper\HelperSet;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Output\OutputInterface;
+use function getcwd;
 
-class DevToolsPlugin implements PluginInterface, Capable
+class Factory
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function activate(Composer $composer, IOInterface $io): void
+    public static function createComposer(
+        InputInterface  $input = new ArgvInput(),
+        OutputInterface $output = new ConsoleOutput(),
+        HelperSet       $helpers = new HelperSet()
+    ): Composer
     {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function deactivate(Composer $composer, IOInterface $io)
-    {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function uninstall(Composer $composer, IOInterface $io)
-    {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getCapabilities(): array
-    {
-        return [
-            \Composer\Plugin\Capability\CommandProvider::class => CommandProvider::class
-        ];
+        return \Composer\Factory::create(
+            io: new ConsoleIO($input, $output, $helpers),
+            config: getcwd() . '/composer.json',
+            disablePlugins: true,
+            disableScripts: true
+        );
     }
 }

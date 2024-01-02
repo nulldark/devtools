@@ -24,41 +24,30 @@
 
 namespace Nulldark\DevTools\Composer;
 
-use Composer\Composer;
-use Composer\IO\IOInterface;
-use Composer\Plugin\Capable;
-use Composer\Plugin\PluginInterface;
+use Composer\Plugin\Capability\CommandProvider as CommandProviderCapability;
+use Nulldark\DevTools\Cli\Console;
+use function array_values;
 
-class DevToolsPlugin implements PluginInterface, Capable
+final readonly class CommandProvider implements CommandProviderCapability
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function activate(Composer $composer, IOInterface $io): void
+    private Console $application;
+
+    public function __construct()
     {
+        $this->application = new Console();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function deactivate(Composer $composer, IOInterface $io)
+    public function getCommands(): array
     {
-    }
+        $commands = [];
 
-    /**
-     * {@inheritDoc}
-     */
-    public function uninstall(Composer $composer, IOInterface $io)
-    {
-    }
+        foreach ($this->application->all('dev') as $command) {
+            $commands[(string)$command->getName()] = new Command($command);
+        }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getCapabilities(): array
-    {
-        return [
-            \Composer\Plugin\Capability\CommandProvider::class => CommandProvider::class
-        ];
+        return array_values($commands);
     }
 }
