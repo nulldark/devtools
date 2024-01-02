@@ -29,7 +29,7 @@ use Composer\IO\IOInterface;
 use Composer\Plugin\Capable;
 use Composer\Plugin\PluginInterface;
 
-class DevToolsPlugin implements PluginInterface, Capable
+class Plugin implements PluginInterface, Capable
 {
     /**
      * {@inheritDoc}

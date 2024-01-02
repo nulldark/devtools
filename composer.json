@@ -57,6 +57,6 @@
     }
   },
   "extra": {
-    "class": "\\Nulldark\\DevTools\\Composer\\DevToolsPlugin"
+    "class": "\\Nulldark\\DevTools\\Composer\\Plugin"
   }
 }
