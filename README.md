@@ -4,7 +4,7 @@ This composer plugin is a development toolkit aimed at simplifying and enhancing
 This project is crafted with an intent to streamline the efforts involved in developmental
 tasks, automate mundane chores, and artfully clear the path for developers to push their boundaries.
 
-## Usage
+## Installation
 
 It's recommended that you use Composer to install
 
@@ -12,7 +12,95 @@ It's recommended that you use Composer to install
 composer require --dev nulldark/devtools
 ```
 
-## Tools
+### PHP_CodeSniffer
+
+Create a `phpcs.xml.dist` file to configure your own coding standard, Below is a sample configuration. It's optional step.
+
+```xml
+<?xml version="1.0"?>
+<ruleset
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd"
+>
+    <file>src</file>
+
+    <arg name="basepath" value="."/>
+    <arg name="extensions" value="php"/>
+    <arg name="parallel" value="80"/>
+    <arg name="colors"/>
+    <arg value="ps"/>
+
+    <rule ref="PSR12"/>
+</ruleset>
+```
+
+### PHPStan
+
+Create a `phpstan.neon.dist` file, below is a sample configuration. It's optional step.
+
+```neon
+parameters:
+    level: max
+    paths:
+        - src/
+```
+
+### PHPUnit
+
+Create a `phpunit.xml.dist` file, below is a sample configuration. It's optional step.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         cacheDirectory="build/cache/phpunit/"
+         executionOrder="depends,defects"
+         requireCoverageMetadata="true"
+         beStrictAboutCoverageMetadata="true"
+         beStrictAboutOutputDuringTests="true"
+         failOnRisky="true"
+         failOnWarning="true">
+    <testsuites>
+        <testsuite name="default">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <source restrictDeprecations="true" restrictNotices="true" restrictWarnings="true">
+        <include>
+            <directory>src</directory>
+        </include>
+    </source>
+</phpunit>
+
+```
+
+## Usage
+
+After installation, type `composer list`, and 
+you'll see a lot of new commands with prefixes `dev:` that this plugin provides.
+
+```bash
+composer list
+```
+
+### Available commands
+
+After execute a `composer list` command, you'll see a section of commands that looks like this:
+
+```
+ dev:
+  dev:analyze          Run all QA tools
+  dev:analyze:phpstan  Run static analyze with PHPStan
+  dev:analyze:psalm    Run static analyze with Psalm
+  dev:lint:fix         Fix violations of coding standards.
+  dev:lint:style       Check violations of coding standards.
+  dev:lint:syntax      Check violations of syntax.
+  dev:test:unit        Run unit tests with PHPUnit
+```
+
+## Available tools
 
 | Package                                                                                                   | Version       |
 |-----------------------------------------------------------------------------------------------------------|---------------|
@@ -33,8 +121,7 @@ composer require --dev nulldark/devtools
 | [phpstan/phpstan-strict-rules](https://github.com/phpstan/phpstan-strict-rules)                           | 1.6.x-dev     |
 | [phpunit/phpunit](https://packagist.org/packages/phpunit/phpunit)                                         | ^10.5.x-dev   |
 | [psalm/plugin-phpunit](https://github.com/psalm/psalm-plugin-phpunit)                                     | dev-master    |
-| [slevomat/coding-standard](slevomat/coding-standard)                                                      | ^8.0@dev      |
-| [squizlabs/php_codesniffer](https://github.com/squizlabs/PHP_CodeSniffer)                                 | ^3.7.1        |
+| [squizlabs/php_codesniffer](https://github.com/squizlabs/PHP_CodeSniffer)                                 | ^4.0.x-dev    |
 | [vimeo/psalm](https://github.com/vimeo/psalm)                                                             | 6.x-dev       |
 
 ## Contributing
